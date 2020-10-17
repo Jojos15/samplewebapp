@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
-import logo from './logo.svg'
+import logo from './logo.svg';
+import LandingScreen from './screens/LandingScreen';
 
 function App() {
   return (
@@ -11,6 +12,9 @@ function App() {
             Pedometer App
         </a>
       </nav>
+      <main>
+        <LandingScreen />
+      </main>
     </div>
   );
 }
