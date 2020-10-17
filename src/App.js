@@ -12,9 +12,9 @@ function App() {
             Pedometer App
         </a>
       </nav>
-      <main>
+      <div className="container w-100">
         <LandingScreen />
-      </main>
+      </div>
     </div>
   );
 }
