@@ -1,10 +1,18 @@
 .App{
   height: 100vh;
-}
-.navbar-brand{
+  
   font-family: "Asap";
 }
 
 h5{
   font-weight: 400;
+}
+
+.container-fluid{
+  height: 100%;
+  padding: 0%;
+}
+
+.parent-div{
+  width:100%
 }

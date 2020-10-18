@@ -6,14 +6,16 @@ import LandingScreen from './screens/LandingScreen';
 function App() {
   return (
     <div className="App">
-      <nav className="navbar navbar-dark bg-dark">
-        <a className="navbar-brand" href="./">
-          <img src={logo} width="30" height="30" className="d-inline-block align-top mr-2" alt="Home" loading="lazy" />
+      <div className="container-fluid">
+        <nav className="navbar navbar-dark bg-dark">
+          <a className="navbar-brand" href="./">
+            <img src={logo} width="30" height="30" className="d-inline-block align-top mr-2" alt="Home" loading="lazy" />
             Pedometer App
         </a>
-      </nav>
-      <div className="container w-100">
-        <LandingScreen />
+        </nav>
+        <div className="row h-75 align-items-center justify-content-center parent-div">
+          <LandingScreen />
+        </div>
       </div>
     </div>
   );
