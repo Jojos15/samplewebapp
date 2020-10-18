@@ -17,11 +17,11 @@ h5{
   width:100%
 }
 
-.flickeringElementFix {
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
+.height-div{
+  height: 90%;
 }
 
-.plot{
-  padding: 0;
+.plotBars{
+  border: 1px solid black;
 }
+

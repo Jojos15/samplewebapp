@@ -1,60 +1,38 @@
 import React, { useRef, useState, useEffect } from 'react';
-import {
-    BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
-} from 'recharts';
+import Plot from './plot'
 
 const Pedometer = (props) => {
 
-    const data = [
-        {
-            name: 'Page A', uv: 4000
-        },
-        {
-            name: 'Page B', uv: 3000
-        },
-        {
-            name: 'Page C', uv: 2000
-        },
-        {
-            name: 'Page D', uv: 2780
-        },
-        {
-            name: 'Page E', uv: 1890
-        },
-        {
-            name: 'Page F', uv: 2390
-        },
-        {
-            name: 'Page G', uv: 3490
-        },
-    ];
+    const [steps, setSteps] = useState();
+    useEffect(() => {
+        let temp = [];
+        for (let i = 0; i < 8; i++) {
+            temp.push(Math.ceil(Math.random() * 500));
+        }
+        console.log("STEPS: " + temp)
+        setSteps(temp);
+    }, []);
 
-    return (
-        <div className="row">
-            <div className="row parent-div justify-content-center">
-                <div className="col-12">
-                    <h1 className="text-center">{props.match.params.name}</h1>
+    if (steps) {
+        return (
+            <div className="row height-div align-items-center justify-content-center parent-div">
+                <div className="row parent-div justify-content-center">
+                    <div className="col-12">
+                        <h1 className="text-center">{props.match.params.name}</h1>
+                    </div>
+                </div>
+                <div className="row height-div" >
+                    <Plot steps={steps} />
+
                 </div>
             </div>
-            <div className="row parent-div h-25 justify-content-center">
-                <div className="col-5">
-                    <BarChart
-                        data={data}
-                        width={500}
-                        height={500}
-                        margin={{
-                            top: 5, right: 30, left: 20, bottom: 5,
-                        }}
-                    >
-                        <XAxis dataKey="name" />
-                        <YAxis />
-                        <Legend />
-                        <Bar dataKey="uv" fill="#82ca9d" />
-                    </BarChart>
-                </div>
-            </div>
-        </div>
-    );
+        );
+    }
+    else {
+        return (
+            <div></div>
+        )
+    }
 }
 
 export default Pedometer;
