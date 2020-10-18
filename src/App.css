@@ -16,3 +16,12 @@ h5{
 .parent-div{
   width:100%
 }
+
+.flickeringElementFix {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.plot{
+  padding: 0;
+}
