@@ -6,7 +6,7 @@ const Pedometer = (props) => {
     const [steps, setSteps] = useState();
     useEffect(() => {
         let temp = [];
-        for (let i = 0; i < 8; i++) {
+        for (let i = 0; i < 7; i++) {
             temp.push(Math.ceil(Math.random() * 500));
         }
         console.log("STEPS: " + temp)
@@ -21,9 +21,8 @@ const Pedometer = (props) => {
                         <h1 className="text-center">{props.match.params.name}</h1>
                     </div>
                 </div>
-                <div className="row height-div" >
+                <div className="row height-div justify-content-center" >
                     <Plot steps={steps} />
-
                 </div>
             </div>
         );
