@@ -15,14 +15,16 @@ const Pedometer = (props) => {
 
     if (steps) {
         return (
-            <div className="row height-div align-items-center justify-content-center parent-div">
-                <div className="row parent-div justify-content-center">
-                    <div className="col-12">
-                        <h1 className="text-center">{props.match.params.name}</h1>
+            <div className="row justify-content-center">
+                <div className="col-12">
+                    <div className="row justify-content-center">
+                        <div className="col-12">
+                            <h1 className="text-center">{props.match.params.name}</h1>
+                        </div>
                     </div>
-                </div>
-                <div className="row height-div justify-content-center" >
-                    <Plot steps={steps} />
+                    <div className="row justify-content-center" >
+                        <Plot steps={steps} />
+                    </div>
                 </div>
             </div>
         );

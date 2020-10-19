@@ -16,10 +16,12 @@ function App() {
             Pedometer App
             </a>
           </nav>
-          <Switch>
-            <Route path="/" exact component={Landing} />
-            <Route path="/:name" component={Pedometer} />
-          </Switch>
+          <div className="col-12">
+            <Switch>
+              <Route path="/" exact component={Landing} />
+              <Route path="/:name" component={Pedometer} />
+            </Switch>
+          </div>
         </div>
       </div>
     </Router>

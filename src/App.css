@@ -13,14 +13,6 @@ h5{
   padding: 0%;
 }
 
-.parent-div{
-  width:100%
-}
-
-.height-div{
-  height: 90%;
-}
-
 .plotBars{
   border: 1px solid black;
   background-color: greenyellow;

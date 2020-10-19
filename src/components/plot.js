@@ -25,43 +25,40 @@ const Plot = (props) => {
 
     const getWidth = () => {
         if (isReady === 2) {
-            return Math.ceil(plotRef.current.clientWidth / 15);
+            return Math.ceil(plotRef.current.clientWidth / 13);
         }
     }
 
     return (
-        <div>
-            <div className="row justify-content-around" ref={plotRef}>
-                <div className="col-1 align-self-center pl-1 pr-1 w-100">
+        <div className="col-12">
+            <div className="row justify-content-between" ref={plotRef}>
+                <div className="col-1 align-self-center">
                     <h3>Steps</h3>
                 </div>
                 {
                     steps.map((item, index) => {
                         return (
                             <div className="col-1 align-self-end pl-1 pr-1 w-100 animate__animated animate__fadeInUp" key={index}>
-                                <h5 className="text-center mb-1">{item}</h5>
+                                <h5 className="text-center">{item}</h5>
                                 <object className="plotBars" width={getWidth()} height={getDistance(item)}></object>
                             </div>
                         )
                     })
                 }
             </div>
-            <div className="row justify-content-around">
+            <div className="row justify-content-between">
                 {
                     tempNames.map((item, index) => {
                         return (
                             <div className="col-1" key={index}>
-                                <h5 className="text-center">{item}</h5>
+                                <h6 className="text-sm-left text-md-center">{item}</h6>
                             </div>
                         );
                     })
                 }
             </div>
-            <div className="row">
-                <div className="col-1">
-
-                </div>
-                <div className="col-11">
+            <div className="row-xs">
+                <div className="col-12">
                     <h3 className="text-center">Day of the Week</h3>
                 </div>
             </div>
