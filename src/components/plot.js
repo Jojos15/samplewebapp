@@ -30,7 +30,7 @@ const Plot = (props) => {
     }
 
     return (
-        <div className="col-12">
+        <div className="col-md-12">
             <div className="row justify-content-between" ref={plotRef}>
                 <div className="col-1 align-self-center">
                     <h3>Steps</h3>
