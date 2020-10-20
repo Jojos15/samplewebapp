@@ -8,7 +8,7 @@ const Plot = (props) => {
 
     useEffect(() => {
         setIsReady(1);
-        //steps = getStepsToDisplay();
+        steps = getStepsToDisplay();
     }, []);
 
     useEffect(() => {
@@ -18,8 +18,8 @@ const Plot = (props) => {
     }, [plotRef]);
 
     const getStepsToDisplay = () => {
-        if (steps.length > 7) {
-            return steps.slice(steps.length - 7, steps.length);
+        if (steps.length == 7) {
+            return steps;
         }
         else {
             let tempArr = [...steps];

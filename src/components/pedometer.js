@@ -6,7 +6,7 @@ import Moment from 'moment';
 const Pedometer = (props) => {
     const [steps, setSteps] = useState([{ data: 0, date: 0 }]);
     const [showModal, setShowModal] = useState(false);
-    let currentWeek = Moment().isoWeekday(1).format('x');
+    const [currentWeek, setCurrentWeek] = useState(Moment().isoWeekday(1).format('x'));
 
     useEffect(() => {
         let temp;
@@ -14,7 +14,21 @@ const Pedometer = (props) => {
         if (temp) {
             setSteps(JSON.parse(temp));
         }
+        console.log(Moment().isoWeekday(1).startOf('day'));
     }, []);
+
+    const getDatesToSent = () => {
+        if (steps.length >= 2) {
+            let selectedDates = [];
+            for (let i = 1; i < steps.length; i++) {
+                if (steps[i].date >= Moment(currentWeek, 'x').startOf('day').format('x') &&
+                    steps[i].date <= Moment(currentWeek, 'x').add(6, 'days').endOf('day').format('x')) {
+                    selectedDates.push(steps[i]);
+                }
+            }
+            return selectedDates;
+        }
+    }
 
     const addButtonHandler = () => {
         setShowModal(true);
@@ -46,7 +60,7 @@ const Pedometer = (props) => {
                     <h4 className="text-muted text-center">Start by adding your steps you took today!</h4>
                 </div>
             );
-        } else return (<Plot steps={steps} />);
+        } else return (<Plot steps={getDatesToSent} />);
 
     };
 
