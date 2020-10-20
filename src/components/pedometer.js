@@ -6,7 +6,7 @@ import Moment from 'moment';
 const Pedometer = (props) => {
     const [steps, setSteps] = useState([{ data: 0, date: 0 }]);
     const [showModal, setShowModal] = useState(false);
-    let currentWeek = [];
+    let currentWeek = Moment().isoWeekday(1).format('x');
 
     useEffect(() => {
         let temp;
@@ -14,7 +14,6 @@ const Pedometer = (props) => {
         if (temp) {
             setSteps(JSON.parse(temp));
         }
-        console.log(Moment().isoWeekday(8));// <- THIIIIIIIIIIISSSSSSS
     }, []);
 
     const addButtonHandler = () => {
@@ -31,7 +30,7 @@ const Pedometer = (props) => {
     }
 
     const submitAndCloseModal = (data) => {
-        let arrayToSort = [...steps, { data: data, date: Moment().format('DDD') }];
+        let arrayToSort = [...steps, { data: data, date: Moment().format('x') }];
         arrayToSort.sort(compareDates);
         localStorage.setItem('steps', JSON.stringify(arrayToSort));
         setSteps(arrayToSort);
@@ -55,15 +54,23 @@ const Pedometer = (props) => {
         <div className="row justify-content-center">
             <AddSteps visibility={showModal} close={closeModal} submit={submitAndCloseModal} />
             <div className="col-12">
-                <div className="row justify-content-center">
-                    <div className="col-12">
-                        <h1 className="text-center">{props.match.params.name}</h1>
+                <div className="row justify-content-around p-1 bg-info">
+                    <div className="col-3 align-self-center text-md-center text-left">
+                        <input className="btn btn-dark" type="button" value="Prev Week" />
+                    </div>
+                    <div className="col-5 align-self-center">
+                        <h5 className="text-center text-white text-wrap">
+                            {`${Moment(currentWeek, 'x').format('MMMM YYYY')} ${Moment(currentWeek, 'x').format('Do')} - ${Moment(currentWeek, 'x').add(6, 'days').format('Do')}`}
+                        </h5>
+                    </div>
+                    <div className="col-3 align-self-center text-md-center text-left">
+                        <input className="btn btn-dark" type="button" value="Next Week" />
                     </div>
                 </div>
-                <div className="row justify-content-center mt-3" >
+                <div className="row justify-content-center mt-3 bg-light" >
                     {conditionalPlot()}
                 </div>
-                <div className="row justify-content-center">
+                <div className="row justify-content-center mt-4">
                     <div className="col-10 col-md-4">
                         <button type="button" className="btn btn-primary btn-lg btn-block" onClick={addButtonHandler}>Add Today's Steps</button>
                     </div>

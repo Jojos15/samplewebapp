@@ -37,7 +37,8 @@ const Plot = (props) => {
             for (let i = 0; i < steps.length; i++) {
                 tempDataOnlyArr.push(steps[i].data);
             }
-            let distance = Math.ceil((value * plotRef.current.clientHeight) / Math.max(...tempDataOnlyArr));
+            let distance = Math.ceil((value * (plotRef.current.clientHeight - 38)) / Math.max(...tempDataOnlyArr));
+            console.log(distance);
             return distance;
         }
     }
@@ -50,12 +51,7 @@ const Plot = (props) => {
 
     return (
         <div className="col-md-12">
-            <div className="row justify-content-center">
-                <div className="col-1">
-
-                </div>
-            </div>
-            <div className="row justify-content-between" ref={plotRef}>
+            <div className="row justify-content-between " ref={plotRef} >
                 <div className="col-1 align-self-center">
                     <h3>Steps</h3>
                 </div>

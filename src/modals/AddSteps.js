@@ -5,7 +5,6 @@ import Moment from 'moment';
 const AddSteps = ({ visibility, close, submit }) => {
 
     const [stepsTaken, setStepsTaken] = useState("");
-
     return (
         <ReactModal
             isOpen={visibility}
@@ -15,8 +14,8 @@ const AddSteps = ({ visibility, close, submit }) => {
                     top: 0,
                     left: 0,
                     right: 0,
-                    bottom: 0,
-                    backgroundColor: 'rgba(0, 0, 0, 0.75)'
+                    bottom: 10,
+                    backgroundColor: 'rgba(0, 0, 0, 0.75)',
                 },
                 content: {
                     position: 'absolute',
@@ -30,12 +29,13 @@ const AddSteps = ({ visibility, close, submit }) => {
                     WebkitOverflowScrolling: 'touch',
                     borderRadius: '4px',
                     outline: 'none',
-                    padding: '20px'
+                    padding: '20px',
                 }
             }}
             onRequestClose={close}
             shouldCloseOnOverlayClick={true}
             shouldCloseOnEsc={true}
+            parentSelector={() => document.querySelector('#element')}
             ariaHideApp={false}>
 
             <div className="modal-dialog" role="document">
