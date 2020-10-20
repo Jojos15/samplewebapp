@@ -1,10 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactModal from 'react-modal';
 import Moment from 'moment';
 
 const AddSteps = ({ visibility, close, submit }) => {
 
     const [stepsTaken, setStepsTaken] = useState("");
+    const [error, setError] = useState(false);
+
+    useEffect(() => {
+        if (isNaN(stepsTaken)) {
+            console.log("error validation");
+            setError(true);
+        }
+        else if (error) {
+            setError(false);
+        }
+    }, [stepsTaken]);
+
     return (
         <ReactModal
             isOpen={visibility}
@@ -55,6 +67,9 @@ const AddSteps = ({ visibility, close, submit }) => {
                                 <label className="col-sm-2 col-form-label">Steps you took: </label>
                                 <div className="col-sm-10">
                                     <input type="text" className="form-control" onChange={(e) => setStepsTaken(e.target.value)} placeholder="None?" />
+                                </div>
+                                <div className={`${error ? "" : "errorView"}`}>
+                                    <p className="text-danger">Please input only numbers</p>
                                 </div>
                             </div>
                         </form>

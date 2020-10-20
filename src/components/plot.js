@@ -38,7 +38,6 @@ const Plot = (props) => {
                 tempDataOnlyArr.push(steps[i].data);
             }
             let distance = Math.ceil((value * (plotRef.current.clientHeight - 38)) / Math.max(...tempDataOnlyArr));
-            console.log(distance);
             return distance;
         }
     }
@@ -51,14 +50,14 @@ const Plot = (props) => {
 
     return (
         <div className="col-md-12">
-            <div className="row justify-content-between " ref={plotRef} >
+            <div className="row justify-content-around " ref={plotRef} >
                 <div className="col-1 align-self-center">
-                    <h3>Steps</h3>
+                    <h5 className="text-left text-warning">Steps</h5>
                 </div>
                 {
                     steps.map((item, index) => {
                         return (
-                            <div className="col-1 align-self-end pl-1 pr-1 w-100 animate__animated animate__fadeInUp" key={index}>
+                            <div className="col-1 align-self-end w-100 animate__animated animate__fadeInUp" key={index}>
                                 <h5 className="text-center">{item.data}</h5>
                                 <object className="plotBars" width={getWidth()} height={getDistance(item.data)}></object>
                             </div>
@@ -66,7 +65,7 @@ const Plot = (props) => {
                     })
                 }
             </div>
-            <div className="row justify-content-between">
+            <div className="row justify-content-around">
                 {
                     dayNames.map((item, index) => {
                         return (
@@ -79,7 +78,7 @@ const Plot = (props) => {
             </div>
             <div className="row-xs">
                 <div className="col-12">
-                    <h3 className="text-center">Day of the Week</h3>
+                    <h5 className="text-center text-info">Day of the Week</h5>
                 </div>
             </div>
         </div>
