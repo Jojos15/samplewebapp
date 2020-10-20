@@ -14,6 +14,7 @@ const Pedometer = (props) => {
         if (temp) {
             setSteps(JSON.parse(temp));
         }
+        console.log(Moment().isoWeekday(8));// <- THIIIIIIIIIIISSSSSSS
     }, []);
 
     const addButtonHandler = () => {
