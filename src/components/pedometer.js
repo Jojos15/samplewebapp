@@ -14,21 +14,42 @@ const Pedometer = (props) => {
         if (temp) {
             setSteps(JSON.parse(temp));
         }
-        console.log(Moment().isoWeekday(1).startOf('day'));
     }, []);
 
     const getDatesToSent = () => {
-        if (steps.length >= 2) {
-            let selectedDates = [];
-            for (let i = 1; i < steps.length; i++) {
-                if (steps[i].date >= Moment(currentWeek, 'x').startOf('day').format('x') &&
-                    steps[i].date <= Moment(currentWeek, 'x').add(6, 'days').endOf('day').format('x')) {
-                    selectedDates.push(steps[i]);
-                }
+        let selectedDates = [];
+        for (let i = 1; i < steps.length; i++) {
+            if (steps[i].date >= Moment(currentWeek, 'x').startOf('day').format('x') &&
+                steps[i].date <= Moment(currentWeek, 'x').add(6, 'days').endOf('day').format('x')) {
+                selectedDates.push(steps[i]);
             }
-            return selectedDates;
         }
+        let formatedDates = [];
+        let j = 0;
+        let day = 0;
+        while (day < 7) {
+            if (j < selectedDates.length && selectedDates[j].date >= Moment(currentWeek, 'x').add(day, 'days').startOf('day').format('x')
+                && selectedDates[j].date <= Moment(currentWeek, 'x').add(day, 'days').endOf('day').format('x')) {
+                formatedDates.push(selectedDates[j]);
+                j++;
+            }
+            else {
+                formatedDates.push({ data: 0, date: 0 });
+            }
+            day++;
+        }
+        console.log(formatedDates);
+        return formatedDates;
     }
+
+    const switchWeeks = (direction) => {
+        if (direction === 'for') {
+            setCurrentWeek(Moment(currentWeek, 'x').add(7, 'days').format('x'));
+        }
+        else {
+            setCurrentWeek(Moment(currentWeek, 'x').subtract(7, 'days').format('x'));
+        }
+    };
 
     const addButtonHandler = () => {
         setShowModal(true);
@@ -60,7 +81,7 @@ const Pedometer = (props) => {
                     <h4 className="text-muted text-center">Start by adding your steps you took today!</h4>
                 </div>
             );
-        } else return (<Plot steps={getDatesToSent} />);
+        } else return (<Plot stepsArr={getDatesToSent()} />);
 
     };
 
@@ -70,7 +91,7 @@ const Pedometer = (props) => {
             <div className="col-12">
                 <div className="row justify-content-around p-1 bg-info">
                     <div className="col-3 align-self-center text-md-center text-left">
-                        <input className="btn btn-dark" type="button" value="Prev Week" />
+                        <input className="btn btn-dark" type="button" value="Prev Week" onClick={() => switchWeeks('back')} />
                     </div>
                     <div className="col-5 align-self-center">
                         <h5 className="text-center text-white text-wrap">
@@ -78,7 +99,7 @@ const Pedometer = (props) => {
                         </h5>
                     </div>
                     <div className="col-3 align-self-center text-md-center text-left">
-                        <input className="btn btn-dark" type="button" value="Next Week" />
+                        <input className="btn btn-dark" type="button" value="Next Week" onClick={() => switchWeeks('for')} />
                     </div>
                 </div>
                 <div className="row justify-content-center mt-3 bg-light" >
