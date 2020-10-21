@@ -38,7 +38,6 @@ const Pedometer = (props) => {
             }
             day++;
         }
-        console.log(formatedDates);
         return formatedDates;
     }
 
@@ -64,8 +63,8 @@ const Pedometer = (props) => {
         if (a.date < b.date) return -1;
     }
 
-    const submitAndCloseModal = (data) => {
-        let arrayToSort = [...steps, { data: data, date: Moment().format('x') }];
+    const submitAndCloseModal = (data, date) => {
+        let arrayToSort = [...steps, { data: data, date: date }];
         arrayToSort.sort(compareDates);
         localStorage.setItem('steps', JSON.stringify(arrayToSort));
         setSteps(arrayToSort);

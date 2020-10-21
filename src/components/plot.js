@@ -32,7 +32,6 @@ const Plot = (props) => {
 
     const getWidth = () => {
         if (isReady === 2) {
-            console.log(window.innerWidth);
             return Math.floor((1.0602 * Math.pow(10, -10) * Math.pow(window.innerWidth, 3)) - (3.18544 * Math.pow(10, -7) * Math.pow(window.innerWidth, 2)) + (0.0836323 * window.innerWidth) - 0.0897574);
         }
     }

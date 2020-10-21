@@ -6,16 +6,40 @@ const AddSteps = ({ visibility, close, submit }) => {
 
     const [stepsTaken, setStepsTaken] = useState("");
     const [error, setError] = useState(false);
+    const [devDate, setDevDate] = useState("");
+    const [devError, setDevError] = useState(false);
 
     useEffect(() => {
         if (isNaN(stepsTaken)) {
-            console.log("error validation");
             setError(true);
         }
         else if (error) {
             setError(false);
         }
     }, [stepsTaken]);
+
+    useEffect(() => {
+        if (devDate != "") {
+            if (!Moment(devDate).isValid()) {
+                setDevError(true);
+            }
+            else if (devError) {
+                setDevError(false);
+            }
+        }
+    }, [devDate]);
+
+    const submitHandler = () => {
+        if (!error && !devError) {
+            if (devDate === "") {
+                submit(stepsTaken, Moment().format('x'));
+            }
+            else submit(stepsTaken, Moment(devDate).format('x'));
+        }
+        else if (!error && devDate === "") {
+            submit(stepsTaken, Moment().format('x'));
+        }
+    }
 
     return (
         <ReactModal
@@ -26,7 +50,7 @@ const AddSteps = ({ visibility, close, submit }) => {
                     top: 0,
                     left: 0,
                     right: 0,
-                    bottom: 10,
+                    bottom: 0,
                     backgroundColor: 'rgba(0, 0, 0, 0.75)',
                 },
                 content: {
@@ -72,10 +96,19 @@ const AddSteps = ({ visibility, close, submit }) => {
                                     <p className="text-danger">Please input only numbers</p>
                                 </div>
                             </div>
+                            <div className="form-group row">
+                                <label className="col-sm-6 col-form-label">(Dev *to be removed from porduction* set specific date, format: (YYYY-MM-DD). Leave blank for current Date.) </label>
+                                <div className="col-sm-10">
+                                    <input type="text" className="form-control" value={devDate} onChange={(e) => setDevDate(e.target.value)} />
+                                </div>
+                                <div className={`${devError ? "" : "errorView"}`}>
+                                    <p className="text-danger">Something is wrong with the format</p>
+                                </div>
+                            </div>
                         </form>
                     </div>
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-primary" onClick={() => submit(stepsTaken)}>Add</button>
+                        <button type="button" className="btn btn-primary" onClick={submitHandler}>Add</button>
                         <button type="button" className="btn btn-secondary" onClick={close}>Close</button>
                     </div>
                 </div>
